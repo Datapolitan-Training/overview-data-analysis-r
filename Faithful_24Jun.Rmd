@@ -1,0 +1,254 @@
+---
+title: "Faithful"
+output: html_document
+---
+
+# Faithful Exercise
+# Goal: Explore R Studio and basic commands in R
+# Directions: Run through line by line. 
+# Use ? if you get lost, ask a neighbor, or raise your hand
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+The reason I propose we use R Markdown is because it allows students to run sections of code independently. Further, R Markdown has the Knit feature that allows for quick production of documents. 
+
+Section 1; Below are a list of basic commands and a short explanation of what they do.
+
+Basic commands in are are structured in the following syntax
+command(dataset)
+
+1) Open dataset
+```{r}
+# This command opens the data.
+
+#View(faithful)
+```
+
+2) Selecting a column and exploring the dataset follow the syntax
+command(dataset$column)
+```{r}
+# This command finds the mean of the column.
+
+mean(faithful$waiting)
+```
+
+```{r}
+# the "?" command is used for help; information about the query is found under the "Help" tab in the viewing window.
+
+?faithful
+```
+
+
+3) Syntax Error!
+```{r}
+
+?colnames
+colnames(faithful)
+```
+
+```{r}
+
+head(faithful)
+```
+
+```{r}
+
+nrow(faithful)
+```
+
+```{r}
+
+ncol(faithful)
+```
+
+4) Understand data structure
+```{r}
+
+str(faithful)
+```
+
+```{r}
+
+class(faithful$eruptions)
+```
+
+```{r}
+
+class(faithful$waiting)
+```
+
+5) Calculate summary statistics
+```{r}
+
+min(faithful$waiting)
+```
+
+```{r}
+
+max(faithful$waiting)
+```
+
+```{r}
+
+mean(faithful$waiting)
+```
+
+```{r}
+
+median(faithful$waiting)
+```
+
+```{r}
+
+summary(faithful)
+```
+
+
+6) Visualize data
+```{r}
+
+hist(faithful$waiting)
+hist(faithful$eruptions)
+
+plot(faithful, main="Eruptions of Old Faithful", xlab="Eruption Time in Minutes", ylab="Waiting Time to Next Eruption in Min")
+abline(lm(faithful$waiting~faithful$eruptions), col="red")
+
+```
+
+
+Section 2; 5 Data Analytics Tasks. Sorting. Filtering. Transforming. Aggregating. Visualizing. 
+
+
+1) Sorting
+
+```{r}
+# We can always refer to the ? command for help
+
+# Here is an example; Sorting by eruption times (default ascending)
+
+faithful[order(faithful$eruptions),]
+
+```
+
+Your turn: Sort the Old Faithful data to find the shortest waiting time.
+
+```{r}
+
+```
+
+Your turn: Sort the Old Faithful data to find the longest waiting time.
+
+```{r}
+
+```
+
+2) Filtering
+
+```{r}
+
+# When filtering it is important to focus only on specific information from a large dataset or table. Filtering doesn't remove or modify data; it just changes which records appear on your screen
+
+# How many instances (rows) have a waiting time greater than 80 (look at our examples above)
+nrow(faithful[faithful$waiting>80,]) 
+dim(faithful[faithful$waiting>80,])
+
+# What about waiting times greater than 30?
+faithful[faithful$waiting>30,]
+
+```
+
+Your turn: Filter for waiting times greater than 80
+
+```{r}
+
+```
+
+Your turn: How many instances (rows) have a waiting time greater than 80 (look at our examples above)
+
+```{r}
+
+```
+
+Your turn: What about waiting times greater than 30?
+
+```{r}
+
+```
+
+Your turn: Sort now by waiting time (ascending)
+
+```{r}
+
+```
+
+Your turn: Sort now by waiting time (descending)
+
+```{r}
+
+```
+
+Your turn: Sort by first Waiting Time and then Eruptions
+
+```{r}
+
+```
+
+Your turn: Sort by first Eruptions and then Waiting Time
+
+```{r}
+
+```
+
+Your turn: Filter for eruptions greater than or equal to 4 minutes
+
+```{r}
+
+```
+
+Your turn: Filter on two criteria (greater than or equal to 4 mins and waiting time greater than or equal to 70)
+
+```{r}
+
+```
+
+3) Transfroming
+
+```{r}
+
+# Now that we know how to Filter and Sort it is time to start transforming the raw data. For this we would like to separate the times that are greater than or equal to 4 mins and those that are less than 4 min.
+
+greater.1 = subset(faithful, faithful$eruptions >= 4,)
+
+greater = nrow(faithful[faithful$eruptions >= 4,])
+less = nrow(faithful[faithful$eruptions < 4,])
+
+greater
+less
+
+```
+Your turn: Create a value of the number of instences that the faithful waiting time over 3 minutes?
+
+```{r}
+
+
+```
+
+4) Aggregating
+
+```{r}
+
+# From here we have our data transformed into two instances. The first being the times that old faithful erupted greater than or equal to 4 mins and second are those that are less than 4 min. We can use this information to aggrigate the percentage of times that old faithful will erupt greater than or equal to 4 mins.
+
+greater / nrow(faithful[faithful$eruptions,])
+
+```
+
+Your turn: aggrigate the percentae of times that the old faithful waiting time will be greater than or equal to 3 mins. 
+
+```{r}
+
+```
